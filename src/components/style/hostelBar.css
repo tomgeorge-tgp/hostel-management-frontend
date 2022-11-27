@@ -1,0 +1,41 @@
+.hostel-bar{
+    max-width:450px;
+    max-height:45px;
+    background-color:grey;
+    width:100%;
+    height:100%;
+    display: flex;
+    position:relative;
+    flex-direction: row;
+    align-items:center;
+    border-radius:5px;
+    margin-top:10px;
+    
+    
+}
+.icon-container{
+  display: flex;
+  position: absolute;
+  right:0;
+  justify-content:end;
+}
+.hostel-bar-text{
+    margin:10px;
+    color:black;
+}
+.delete-bin{
+    margin-right:5px;
+    width:32px;
+    height:32px;
+    text-align:center;
+    background-color:azure; 
+    border-radius:10px; 
+}
+.edit-pencil{
+    width:32px;
+    height:32px;
+    margin-right:5px;
+    background-color:azure; 
+    text-align:center;
+    border-radius:10px; 
+}
