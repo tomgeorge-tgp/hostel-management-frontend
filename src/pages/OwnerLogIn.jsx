@@ -10,20 +10,25 @@ import {
   useNavigate,
   useLocation
 } from 'react-router-dom';
-
+import useLocalStorageRef from "../hooks/LocalStorage"
 
 function SignIn() {
- const {setAuth}=useAuth();
+ const {auth,setAuth}=useAuth();
  const navigate = useNavigate();
+ const [userData, setUserData, removeUserData] = useLocalStorageRef("user")
  const location=useLocation();
+ const from ="/owner/dashboard" || "/";
+
 //  const from=location.state?.from?.pathname || "/";
-  const from="/owner-dashboard";
+  //const from="/owner-dashboard";
   // const [error, setError] = useState("");
   // const history = useHistory();
 
 
 
-  const [userData, setUserData] = useState({});
+  
+  //
+  //const [userData, setUserData] = useState({});
 
 //   if (loggedIn) {
 //     return <Redirect to="/app" />;
@@ -56,12 +61,22 @@ function SignIn() {
                 console.log(JSON.stringify(response?.data));
                 // const accessToken=response?.data?.accessToken;
                 // const roles=response?.data?.roles;
-                // setAuth({user,accessToken,roles});
+                let userdetails={
+                    _id:response?.data?.user._id,
+                    email:response?.data?.user.email,
+
+                }
+                 setAuth(userdetails);
+                 setUserData(userdetails);
+                 console.log("userData",userData);
+                 //console.log(auth);
+                 navigate(from,{replace:true});
                 // setAuth({user,pwd,roles,accessToken});
                 console.log("Logged In Successfully!");
                 // navigate(from,{replace:true});
               } 
               catch (err) {
+                console.log(err);
                 if(!err?.response)
                 {
                   console.log('No Server Response');
@@ -77,14 +92,13 @@ function SignIn() {
                  console.log('Login Failed');
                  console.log(err);
                 }
-                // navigate("/owner-dashboard");
               }
 
               // setSubmitting(false);
             }}
           />
           <h6>
-            {/* <Link to="/workerSignUp">Sign Up</Link> */}
+            <Link to="/signup">Sign Up</Link>
           </h6>
         </div>
         <div className="col-sm-7 d-flex justify-content-center align-items-center">

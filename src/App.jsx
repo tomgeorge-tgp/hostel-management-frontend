@@ -17,14 +17,18 @@ function App() {
     <BrowserRouter>
     <AuthProvider>
     <Routes>
-    <Route path="/" element={<Layout/>}/>
-    <Route path="home" element={<Home/>}/>
+    <Route path="/*" element={<Layout/>}/>
+     {/* public routes */}
+    <Route path="/" element={<Home/>}/>
     <Route path="signup" element={<OwnerSignUp/>} />   
     <Route path="login" element={<OwnerLogIn/>} /> 
+    {/* require authentation */}
     <Route element={<RequireAuth/>}>
       <Route path="owner/dashboard" element={<OwnerDashboard/>}/>
       <Route path="owner/hostel-dashboard" element={<HostelDashboard/>}/>
     </Route>
+
+
     </Routes>
     </AuthProvider>
     </BrowserRouter>

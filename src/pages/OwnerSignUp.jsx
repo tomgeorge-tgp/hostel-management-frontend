@@ -1,22 +1,28 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Form, Button, Card, Alert } from "react-bootstrap";
 // import tool from "../assest/tool.png";
 import axios from "../api/axios";
 import Forms from "../components/SignUpForm";
-import { Link,  } from "react-router-dom"; //Redirect
+import {Link,Navigate,useNavigate,useLocation} from "react-router-dom"
 import {signupUrl} from "../url/url";
 // import axios from "axios";
-
+import useAuth from "../hooks/useAuth";
+import useLocalStorageRef from "../hooks/LocalStorage"
 
 function OwnerSignUp() {
   
   
   const [error, setError] = useState("");
-
-
-//    if(loggedIn)
-    //  return <Redirect to="/app" />
-
+  const location=useLocation();
+  const navigate = useNavigate(); 
+  const {auth,setAuth}=useAuth();
+  const [userData, setUserData, removeUserData] = useLocalStorageRef("user")
+  const from ="/owner/dashboard" || "/";
+  // useEffect(() => {
+  //   if(auth)
+  //   navigate("/owner/dashboard");
+  // }, [auth]);
+ 
   return (
     <div className="container mt-5">
       <div className="row">
@@ -46,6 +52,7 @@ function OwnerSignUp() {
                          password: values.password,
                          locality:"",
                          district:"",
+                         imageUrl:"",
 
                        }
                        console.log(userInfo);
@@ -60,17 +67,22 @@ function OwnerSignUp() {
                       }
                       )
                       console.log(response.data);
-                       console.log("Registered Successfully!");
+                      setAuth(response.data.user);
+                      setUserData(response.data.user);
+                      navigate(from,{replace:true});
+                      console.log("Registered Successfully!");
+                      
                     }
                   
                    catch(err) {
-                    if(!err?.response)
-                    {
-                      console.log('no server response');
-                    }
-                    else if(err.response?.status==409)
+                    console.log(err);
+                     if(err.response?.status==409)
                     {
                       console.log('Username Taken');
+                    }
+                    else if(err?.response)
+                    { console.log(!err?.response);
+                      console.log('no server response');
                     }
                     else
                     {
@@ -92,10 +104,10 @@ function OwnerSignUp() {
           />
         </div>
         <div className="w-100 text-left mt-2 ">
-          {/* Already have an account? <Link to="" className="text-decoration-none" >Log In</Link> */}
+          Already have an account? <Link to="/login" className="text-decoration-none" >Log In</Link>
         </div>
         <div className="col-sm-7 d-flex justify-content-center align-items-center">
-          <img className="img-fluid  w-50  " src={""} alt="not found" />
+          {/* <img className="img-fluid  w-50  " src={""} alt="not found" /> */}
         </div>
       </div>
     </div>
