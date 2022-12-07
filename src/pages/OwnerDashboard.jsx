@@ -39,11 +39,13 @@ function OwnerDashboard() {
   const [imageList, setImageList] = useState([]);
   const location = useLocation();
 
-  const from = "/login" || "/";
+  const from = "/";
   const allInputs = { imgUrl: "" };
   //console.log("id",userData.current)
+  console.log("hostel data", hostels)
 
   let endpoints = [
+
     {
       url: usersDashboardUrl + `/${userData.current._id}`,
       onSuccess: (res) => {
@@ -62,7 +64,6 @@ function OwnerDashboard() {
     },
   ];
 
-  
 
   useEffect(() => {
     // axios
@@ -174,9 +175,7 @@ function OwnerDashboard() {
                       for="actual-btn"
                       style={{
                         backgroundColor: "transparent",
-
                         padding: "0.5rem",
-
                         // fontFamily: "sans-serif",
                         borderRadius: "1.5rem",
                         cursor: "pointer",
@@ -189,8 +188,15 @@ function OwnerDashboard() {
                           " all .3s cubic-bezier(.175, .885, .32, 1.275)",
                       }}
                     >
-                      <i className=" fas fa-camera  fa-2x"></i>{" "}
-                    </label>
+                    <div
+                     onClick={()=>{
+
+                     }}
+                    >
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M12 17.5C13.25 17.5 14.3127 17.0627 15.188 16.188C16.0627 15.3127 16.5 14.25 16.5 13C16.5 11.75 16.0627 10.6873 15.188 9.812C14.3127 8.93733 13.25 8.5 12 8.5C10.75 8.5 9.68733 8.93733 8.812 9.812C7.93733 10.6873 7.5 11.75 7.5 13C7.5 14.25 7.93733 15.3127 8.812 16.188C9.68733 17.0627 10.75 17.5 12 17.5ZM12 16.5L10.9 14.1L8.5 13L10.9 11.9L12 9.5L13.1 11.9L15.5 13L13.1 14.1L12 16.5ZM4 21C3.45 21 2.97933 20.8043 2.588 20.413C2.196 20.021 2 19.55 2 19V7C2 6.45 2.196 5.97933 2.588 5.588C2.97933 5.196 3.45 5 4 5H7.15L9 3H15L16.85 5H20C20.55 5 21.021 5.196 21.413 5.588C21.8043 5.97933 22 6.45 22 7V19C22 19.55 21.8043 20.021 21.413 20.413C21.021 20.8043 20.55 21 20 21H4Z" fill="black"/>
+                      </svg>
+                    </div>
                   </>
                 )}
               </div>
@@ -234,6 +240,7 @@ function OwnerDashboard() {
                 <Dropdown.Item
                   onClick={async () => {
                     console.log("click");
+                    navigate(from, { replace: true });
                     setAuth(null);
                   }}
                 >
@@ -242,7 +249,8 @@ function OwnerDashboard() {
                 <Dropdown.Item
                   onClick={async () => {
                     console.log("click");
-                    try {
+                    if(!hostels){
+                      try {
                       const response = await axios.delete(
                         usersDeleteUrl + `/${userData.current._id}`,
                         {
@@ -272,7 +280,13 @@ function OwnerDashboard() {
                         console.error(err);
                       }
                     }
-                  }}
+                  }
+                  else{
+                    alert("You have still hostel registered!")
+                  }
+                  }
+                    }
+                    
                 >
                   Delete Acc
                 </Dropdown.Item>
@@ -446,7 +460,7 @@ function OwnerDashboard() {
               </div>
 
               {/* right side skills */}
-              <PopUp trigger={buttonPopUp} setTrigger={setButtonPopUp} />
+              <PopUp trigger={buttonPopUp} setTrigger={setButtonPopUp} onAdd={(data) => setHostels(curr_data => [...curr_data, data])} />
               <div className="col-md-6">
                 <div className="tab-content profile-tab" id="myTabContent">
                   <div className="hostel-box-header">
@@ -461,15 +475,11 @@ function OwnerDashboard() {
                       <BsPlusLg />
                     </div>
                   </div>
-                  <div className="hostel-box-container">
-         
+                  <div className="hostel-box-container">         
                    {
-                     hostels.map((hostel)=>(
-                    
-                       <HostelBar data={hostel} />
-
+                     hostels.map((hostel, index) => (
+                      <HostelBar key={index} data={hostel} onDelete={() => setHostels(curr_data => curr_data.filter((data, idx) => idx !== index)) } />
                      ))
-
                    }
                   </div>
 

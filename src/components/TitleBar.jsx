@@ -6,7 +6,7 @@ function TitleBar()
     const navigate = useNavigate(); 
     return(
         <div className="title-bar">
-        <a href="#default" class="logo">CompanyLogo</a>
+        <a href="#default" class="logo">FindHostel</a>
         <div className="login-button-container">
           <button className="login-button" onClick={(e)=>{
               navigate("/login");

@@ -5,14 +5,20 @@ import {fetchHomeUrl} from "../url/url";
 import NavBar from "../components/NavBar";
 import TitleBar from "../components/TitleBar";
 import Cards from  "../components/Cards"
-
+import {Link,Navigate,useNavigate,useLocation} from "react-router-dom"
 
 function HostelCard({hostels}){
-    
+    const location=useLocation();
+    const navigate = useNavigate(); 
     return hostels.map((hostel, index) =>{
        return(
        <div key={index} className="col-sm">
+    <div onClick={()=>{
+        console.log("click");
+        navigate("/hostel" ,{state:hostel});
+    }}>
     <Cards data={hostel}/>
+    </div> 
     </div>
        )
     });

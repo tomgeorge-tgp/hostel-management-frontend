@@ -15,7 +15,7 @@ export const usersDeleteUrl="/api/user/delete";
 export const fetchHomeUrl="/api/hostel/";
 
 
-
+// export const fetchHostelUrl="/api/hostel"
 
 export const hostelAddUrl="/api/hostel";
 

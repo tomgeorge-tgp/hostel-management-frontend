@@ -53,10 +53,11 @@
     background-color: transparent;
     height:50px;
     width:100px;
-    color: black;
+    color: white;
 } 
 .login-button:hover {
     background-color:white;
     border-color:paleturquoise;
+    color: black;
     border-width: 4px;
 } 

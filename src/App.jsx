@@ -8,7 +8,8 @@ import Home from './pages/Home'
 import Layout from './layout/Layout';
 
 import RequireAuth from './pages/requireAuth';
-import HostelDashboard from './pages/HostelDashboard'
+import HostelDashboard from './pages/HostelDashboard';
+import HostelPage from './pages/HostelPage'
 import OwnerDashboard from './pages/OwnerDashboard';
 function App() {
   // const [count, setCount] = useState(0)
@@ -22,6 +23,7 @@ function App() {
     <Route path="/" element={<Home/>}/>
     <Route path="signup" element={<OwnerSignUp/>} />   
     <Route path="login" element={<OwnerLogIn/>} /> 
+    <Route path="hostel" element={<HostelPage/>} /> 
     {/* require authentation */}
     <Route element={<RequireAuth/>}>
       <Route path="owner/dashboard" element={<OwnerDashboard/>}/>

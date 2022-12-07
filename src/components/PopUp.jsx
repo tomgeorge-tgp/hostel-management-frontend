@@ -8,18 +8,18 @@ import {hostelAddUrl} from "../url/url";
 import axios from 'axios' ;
 import useAuth from "../hooks/useAuth";
 import useLocalStorageRef from "../hooks/LocalStorage"
+
 function PopUp(props)
 {
-   
     const [name,setName]=useState("");
     const [category,setCategory]=useState("");
-    const [singleBed,setSingleBed]=useState("0");
-    const [doubleBed,setDoubleBed]=useState("0");
-    const [tripleBed,setTripleBed]=useState("0");
+    const [singleBed,setSingleBed]=useState(0);
+    const [doubleBed,setDoubleBed]=useState(0);
+    const [tripleBed,setTripleBed]=useState(0);
     const [address,setAddress]=useState("");
     const [city,setCity]=useState("");
     const [imageUrl,setImageUrl]=useState("");
-    const [users,setUsers]=useState([]);
+    const [users,setUsers] = useState([]);
     const {auth,setAuth}=useAuth();
     const [userData, setUserData, removeUserData] = useLocalStorageRef("user");
 
@@ -28,9 +28,7 @@ function PopUp(props)
 
     async function handleSubmit(e)
     {
-      
-        e.preventDefault();
-
+      e.preventDefault();
       try{  
       const data={
          _id_owner:userData.current._id,
@@ -55,10 +53,8 @@ function PopUp(props)
         }
         )
         console.log(response.data);
-        // setAuth(response.data.user);
-        // setUserData(response.data.user);
-       
         console.log("Hostel Registered Successfully!");
+        props?.onAdd(response?.data?.hostel);
         props.setTrigger(false);
       }
     
@@ -79,27 +75,26 @@ function PopUp(props)
         console.error(err);
       }
     }
-    
   }
 
 
    return((props.trigger)?(<>
    <div className="popup">
    <div className="popup-inner">
-    <button className="close-btn" onClick={()=>props.setTrigger(false)}>close</button>
-     <h3> Hostel Details</h3>
-     <Form onSubmit={handleSubmit}>
-     <Form.Group as={Row} className="mb-3" controlId="formPlaintextEmail">
-     <Form.Label column sm="2"> Name </Form.Label>
+    <button className="close-btn" onClick={() => props.setTrigger(false)}>close</button>
+    <h3> Hostel Details</h3>
+    <Form onSubmit={handleSubmit}>
+    <Form.Group as={Row} className="mb-3" controlId="formPlaintextEmail">
+    <Form.Label column sm="2"> Name </Form.Label>
 
-      <Form.Control type="text" placeholder="Hostel Name" 
-         onChange={(e)=>{
+    <Form.Control type="text" placeholder="Hostel Name" 
+         onChange={(e) => {
                 setName(e.target.value);
                 console.log(name);
             }}
-      />
-      <br></br>
-      <h4 className="mt-4">Category</h4>
+    />
+    <br></br>
+    <h4 className="mt-4">Category</h4>
         <div key="radio" className="mb-3">
           <Form.Check
             inline
@@ -187,13 +182,9 @@ function PopUp(props)
 
      </Form>
      <br />
-
-
-  
     {props.children}
     </div>
    </div>
-
    </>):""
    ) 
 }

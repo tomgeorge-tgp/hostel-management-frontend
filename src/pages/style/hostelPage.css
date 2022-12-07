@@ -1,0 +1,200 @@
+/* body{
+    background: -webkit-linear-gradient(left,white,#b3e3f0);
+} */
+.emp-profile{
+    padding: 3%;
+    margin-top: 3%;
+    margin-bottom: 3%;
+    border-radius:0.5rem;
+    background-color: wheat;
+}
+.hostel-profile-img {
+    text-align: center;
+    padding-left: 5%;
+    padding-right:5%;
+}
+
+.hostel-profile-img-left img{
+    width:150px;
+    height:150px;
+    
+    float:left;
+    border-radius: 20%;
+    border: 5px solid #555;
+}
+.hostel-profile-img-right img{
+    width:150px;
+    height:150px;
+    margin-right:6%;
+    float:right;
+    border-radius: 20%;
+    border: 5px solid #555;
+}
+
+.profile-head {
+   margin-bottom: 3%;
+}
+
+
+.profile-head .name{
+    color:#333;
+    border: none;
+   
+   font-size:28px;
+    margin:0%;
+    
+
+}
+.profile-head  .name{
+    font-weight: 700;
+    font-size: 2.0rem;
+}
+.profile-head .work{
+    
+    color:#0062cc;
+    font-size: 1.5rem;
+}
+
+
+
+
+
+
+
+.profile-head .nav-tabs .nav-link{
+    font-weight:600;
+    border: none;
+}
+.profile-head .nav-tabs .nav-link.active{
+    border: none;
+    border-bottom:2px solid #012821;
+    border-radius: 20%;
+}
+
+
+.details{
+    margin-top: 4%;
+}
+.owner-details{
+    padding-top:2%;
+}
+.owner-details-text{
+ 
+    display:inline;
+    font-size: 15px;
+    padding-left: 0%;
+   
+}
+
+.no_three_bed p{
+    display:inline;
+    font-size: 15px;
+    margin-left: 10px;
+}
+.no_two_bed p{
+    display:inline;
+    font-size: 15px;
+    margin-left: 40px;
+}
+.no_one_bed p{
+    display:inline;
+    font-size: 15px;
+    margin-left: 70px;
+}
+
+
+
+.profile-work-left{
+    margin-top:2%;
+    padding-left:0;
+   
+}
+.profile-work-left p{
+    width: 100%;
+}
+/* .owner-details {
+ 
+    display:inline-block;
+   
+} */
+.profile-work-left h6{
+    font-size: 20px;
+    color: #818182;
+    font-weight: 600;
+
+    
+}
+.profile-work-left ul {
+    list-style-type: none;
+    
+    text-align:left;
+    
+}
+.profile-work-left  .place,.address{
+    outline:none;
+    border: none;
+    background-color: wheat;
+}
+.profile-work-left li{
+    
+    color: #495057;
+    font-weight: 600;
+    font-size: 20px;
+}
+
+.profile-work-right{
+    margin:0;
+    padding-left:15%;
+    padding-top:3%;
+   
+}
+.profile-work-right p{
+    width: 100%;
+}
+/* .profile-work-right p,.profile-work-right{
+ 
+    display:inline-block;
+   
+} */
+.profile-work-right h6{
+    font-size: 20px;
+    color: #818182;
+    font-weight: 600;
+
+    
+}
+.profile-work-right ul {
+    list-style-type: none;
+    
+    text-align:left;
+    
+}
+.profile-work-right  .place,.address{
+    outline:none;
+    border: none;
+    background-color: wheat;
+}
+.profile-work-right li{
+    
+    color: #495057;
+    font-weight: 600;
+    font-size: 20px;
+}
+
+.blue {
+    color: #47bcd4;
+  }
+  .tag-purple {
+    background-color: #5e76bf;
+    font-size: 20px;
+    text-align:center;
+  }
+  .pink {
+    color: #cd5b9f;
+    font-size: 20px;
+    text-align:center;
+  }
+
+
+
+

@@ -4,6 +4,7 @@ import axios from "axios";
 import {hostelDeleteUrl} from "../url/url";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 
+
 function HostelBar(props) {
      console.log(props);
      const navigate = useNavigate();
@@ -34,10 +35,7 @@ function HostelBar(props) {
                       );
                       console.log(response.data);
                       console.log("Deleted Successfully!");
-                      setAuth(null);
-                      setUserData(null);
-
-                      navigate(from, { replace: true });
+                      props?.onDelete();
                     } catch (err) {
                       console.log(err);
                       if (err.response?.status == 409) {

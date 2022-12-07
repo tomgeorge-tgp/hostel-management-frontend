@@ -5,7 +5,7 @@ import { useEffect,useState,useRef } from 'react';
 import {Link,Navigate,useNavigate,useLocation} from "react-router-dom"
 import avatarDefault from "../assets/avatarDefault.png";
 import "./style/hostelDashboard.css";
-import { hostelUpdateUrl } from "../url/url";
+import { hostelUpdateUrl,hostelFetchUrl} from "../url/url";
 function HostelDashboard(){
 
 const location=useLocation();
@@ -14,31 +14,47 @@ const [editMode, setEditMode] = useState(false);
 const [image, setImage] = useState(null);
 const [imageUrl, setImageUrl] = useState(location?.imageUrl || "");
 const [imageList, setImageList] = useState([]);
-// useEffect(()=>{
-//     axios.get(fetchHomeUrl)
-//     .then(res=>{
-//         setUsers(res.data)
-//         console.log(res.data);
-//     }).catch(err=>{
-//         console.log(err)
+const [hostel, setHostel] = useState({});
+const dataValues = useRef({
+    name: "",
+    gender: "",
+    Address: "",
+    City: "",
+    no_one_bed: 0,
+    no_two_bed: 0,
+    no_three_bed: 0,
+    imageUrl: "",
+  })
+useEffect(()=>{
+    axios.get(hostelFetchUrl+ `/data/${location?.state?._id}`)
+    .then(res=>{
+        setHostel(res.data.hostel);
+        console.log("res.data",res.data);
+        dataValues.current = res.data.hostel;
+    }).catch(err=>{
+        console.log(err)
     
-//     })
-//     },[])
+    })
 
 
 
-console.log("location.state", location.state);
-  var dataValues = useRef({
-    name: location?.name || "",
-    gender: location?.gender || "",
-    Address: location?.address||"",
-    City: location?.City || "",
-    no_one_bed: location?.no_one_bed|| 0,
-    no_two_bed: location?.no_two_bed|| 0,
-    no_three_bed: location?.no_three_bed|| 0,
-    imageUrl: location?.imageUrl || "",
-  });
+  },[])
+  
 
+  // var dataValues = useRef({
+  //   name: hostel?.name || "",
+  //   gender: hostel?.gender || "",
+  //   Address: hostel?.address||"",
+  //   City: hostel?.City || "",
+  //   no_one_bed: hostel?.no_one_bed|| 0,
+  //   no_two_bed: hostel?.no_two_bed|| 0,
+  //   no_three_bed: hostel?.no_three_bed|| 0,
+  //   imageUrl: hostel?.imageUrl || "",
+  // });
+
+console.log("hostel",hostel);
+
+  console.log("datavalue",dataValues);
 return(<>
 
 
@@ -116,7 +132,7 @@ return(<>
               id="name"
               name="name"
               placeholder="Name"
-              defaultValue={ location?.state.name }
+              defaultValue={ hostel?.name }
               onChange={(e) => {
                 {
                   console.log("name",e.target.value),
@@ -134,7 +150,7 @@ return(<>
             />
             <ul className="nav nav-tab" role="tablist">
               <li className="nav-item"></li>
-              <li className="nav-item">{location?.state.category}</li>
+              <li className="nav-item">{hostel?.category}</li>
             </ul>
           </div>
         </div>
@@ -162,7 +178,7 @@ return(<>
                       //  console.log("dataimageUrl");
                       //  console.log(dataimageUrl);
                       // setDataValue(prevDatavalues => ({...prevDatavalues, imageUrl: dataImgUrl }))
-                      dataValues.current = {...dataValues.current,name:location.state.name,_id:location.state._id,_id_owner:location.state._id_owner };// imageUrl: dataImgUrl
+                      dataValues.current = {...dataValues.current,name:hostel.name,_id:hostel._id,_id_owner:hostel._id_owner};// imageUrl: dataImgUrl
   
                         // dataValues.imageUrl=dataImgUrl;
                       //  handler.forceUpdate();
@@ -234,8 +250,8 @@ return(<>
                   type="text"
                   id="Address"
                   name="Address"
-                  defaultValue={location?.state.Address || ""}
-                  placeholder="City"
+                  defaultValue={hostel?.Address || ""}
+                  placeholder="Address"
                   disableunderline={true}
                   readOnly={!editMode}
                   onChange={(e) => {
@@ -256,7 +272,7 @@ return(<>
                   type="text"
                   id="City"
                   name="City"
-                  defaultValue={""}
+                  defaultValue={hostel?.City}
                   placeholder="City"
                   disableunderline={true}
                   readOnly={!editMode}
@@ -300,19 +316,20 @@ return(<>
           
           <div className="col-md-6">
             <div className="tab-content profile-tab" id="myTabContent">
-              <div className="beds-header">Number of Beds</div>
+              <div className="beds-header">Number of Beds Left:</div>
               <ul>
                 <li>
                 <div>
                 <svg width="32" height="32" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M38 14H22V28H6V10H2V40H6V34H42V40H46V22C46 19.8783 45.1571 17.8434 43.6569 16.3431C42.1566 14.8429 40.1217 14 38 14ZM14 26C15.5913 26 17.1174 25.3679 18.2426 24.2426C19.3679 23.1174 20 21.5913 20 20C20 18.4087 19.3679 16.8826 18.2426 15.7574C17.1174 14.6321 15.5913 14 14 14C12.4087 14 10.8826 14.6321 9.75736 15.7574C8.63214 16.8826 8 18.4087 8 20C8 21.5913 8.63214 23.1174 9.75736 24.2426C10.8826 25.3679 12.4087 26 14 26V26Z" fill="black"/>
                 </svg>
+                
                 <input
                   className="address"
                   type="number"
                   id="no_one_bed"
                   name="no_one_bed"
-                  defaultValue={location?.state.no_one_bed }
+                  defaultValue={hostel?.no_one_bed }
                   placeholder="0"
                   disableunderline={true}
                   readOnly={!editMode}
@@ -334,12 +351,13 @@ return(<>
                 <svg width="32" height="32" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M38 14H22V28H6V10H2V40H6V34H42V40H46V22C46 19.8783 45.1571 17.8434 43.6569 16.3431C42.1566 14.8429 40.1217 14 38 14ZM14 26C15.5913 26 17.1174 25.3679 18.2426 24.2426C19.3679 23.1174 20 21.5913 20 20C20 18.4087 19.3679 16.8826 18.2426 15.7574C17.1174 14.6321 15.5913 14 14 14C12.4087 14 10.8826 14.6321 9.75736 15.7574C8.63214 16.8826 8 18.4087 8 20C8 21.5913 8.63214 23.1174 9.75736 24.2426C10.8826 25.3679 12.4087 26 14 26V26Z" fill="black"/>
                 </svg>
+                
                 <input
                   className="address"
                   type="number"
                   id="no_two_bed"
                   name="no_two_bed"
-                  defaultValue={location?.state.no_two_bed}
+                  defaultValue={hostel?.no_two_bed}
                   placeholder="0"
                   disableunderline={true}
                   readOnly={!editMode}
@@ -365,13 +383,13 @@ return(<>
                 <svg width="32" height="32" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M38 14H22V28H6V10H2V40H6V34H42V40H46V22C46 19.8783 45.1571 17.8434 43.6569 16.3431C42.1566 14.8429 40.1217 14 38 14ZM14 26C15.5913 26 17.1174 25.3679 18.2426 24.2426C19.3679 23.1174 20 21.5913 20 20C20 18.4087 19.3679 16.8826 18.2426 15.7574C17.1174 14.6321 15.5913 14 14 14C12.4087 14 10.8826 14.6321 9.75736 15.7574C8.63214 16.8826 8 18.4087 8 20C8 21.5913 8.63214 23.1174 9.75736 24.2426C10.8826 25.3679 12.4087 26 14 26V26Z" fill="black"/>
                 </svg>
-                
+               
                 <input
                   className="address"
                   type="number"
                   id="no_three_bed"
                   name="no_three_bed"
-                  defaultValue={location?.state.no_three_bed}
+                  defaultValue={hostel?.no_three_bed}
                   placeholder="0"
                   disableunderline={true}
                   readOnly={!editMode}
