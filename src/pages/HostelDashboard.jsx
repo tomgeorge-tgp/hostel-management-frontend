@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useEffect,useState,useRef } from 'react';
 // import {fetchHomeUrl} from "../url/url";
 import {Link,Navigate,useNavigate,useLocation} from "react-router-dom"
-import avatarDefault from "../assets/avatarDefault.png";
+import avatarDefault from "../assets/hostelDefault.jpg";
 import "./style/hostelDashboard.css";
 import { hostelUpdateUrl,hostelFetchUrl} from "../url/url";
 function HostelDashboard(){
@@ -178,7 +178,7 @@ return(<>
                       //  console.log("dataimageUrl");
                       //  console.log(dataimageUrl);
                       // setDataValue(prevDatavalues => ({...prevDatavalues, imageUrl: dataImgUrl }))
-                      dataValues.current = {...dataValues.current,name:hostel.name,_id:hostel._id,_id_owner:hostel._id_owner};// imageUrl: dataImgUrl
+                      dataValues.current = {...dataValues.current,_id:hostel._id,_id_owner:hostel._id_owner};// imageUrl: dataImgUrl
   
                         // dataValues.imageUrl=dataImgUrl;
                       //  handler.forceUpdate();

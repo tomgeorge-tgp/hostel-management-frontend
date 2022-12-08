@@ -102,12 +102,12 @@ function SignIn() {
           </h6>
         </div>
         <div className="col-sm-7 d-flex justify-content-center align-items-center">
-          <img
+          {/* <img
             className="img-fluid  w-50  "
             style={{ JustifyContent: "Right" }}
             src={""}
             alt="not found"
-          />
+          /> */}
         </div>
       </div>
     </div>

@@ -107,7 +107,13 @@ function OwnerSignUp() {
           Already have an account? <Link to="/login" className="text-decoration-none" >Log In</Link>
         </div>
         <div className="col-sm-7 d-flex justify-content-center align-items-center">
-          {/* <img className="img-fluid  w-50  " src={""} alt="not found" /> */}
+         {/* <img
+            className="img-fluid  w-50  "
+            style={{ JustifyContent: "Right" }}
+            src={""}
+            alt="not found"
+          /> */}
+         
         </div>
       </div>
     </div>

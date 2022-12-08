@@ -1,5 +1,5 @@
 
-
+import hostelDefault from "../assets/hostelDefault.jpg"
 import "./style/cards.css" 
 function Card(props)
 {
@@ -10,11 +10,11 @@ function Card(props)
         
         <div className="card">
           <div className="card-header">
-            <img src="./images/ymca.webp" alt="city" />
+            <img src={hostelDefault} alt="city" />
           </div>
           <div className="card-body">
             <span className={`tag ${props.data.category=="male"? "tag-teal":"tag-pink"}`}>{props.data.category=="male" ? "Gents":"Ladies"}</span>
-            <h4 className="hostel-name">
+            <h4 className="hostel-card-name">
               {props.data.name}
             </h4>
             <div className="details">
@@ -36,7 +36,7 @@ function Card(props)
              </div>           
             <div className="user">
               <img src="https://studyinbaltics.ee/wp-content/uploads/2020/03/3799Ffxy.jpg" alt="user" />
-              
+
               <div className="user-info">
                 <div>
                 <h4 className="owner-name">{props.data.first_name}</h4>

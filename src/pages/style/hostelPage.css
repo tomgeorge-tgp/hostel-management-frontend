@@ -36,19 +36,19 @@
 }
 
 
-.profile-head .name{
+ .hostel-name{
     color:#333;
     border: none;
    
-   font-size:28px;
+   font-size:45px;
     margin:0%;
     
 
 }
-.profile-head  .name{
+/* .profile-head  .name{
     font-weight: 700;
     font-size: 2.0rem;
-}
+} */
 .profile-head .work{
     
     color:#0062cc;

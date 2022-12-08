@@ -6,6 +6,8 @@ import NavBar from "../components/NavBar";
 import TitleBar from "../components/TitleBar";
 import Cards from  "../components/Cards"
 import "./style/hostelPage.css";
+import ownerDefault from "../assets/avatarDefault.png";
+import hostelDefault from "../assets/hostelDefault.jpg";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import "./style/hostelPage.css"
 function HostelPage(){
@@ -14,8 +16,8 @@ const location = useLocation();
 const navigate = useNavigate();
 
 // setHostel(location.state);
-console.log(hostel);
-
+//console.log(hostel);
+console.log(location.state);
     return(<>
         
     <div className="container emp-profile">
@@ -34,7 +36,7 @@ console.log(hostel);
           <div className="hostel-profile-img-left " style={{ position: "relative" }}>
             {console.log("image")}
             {/* {  console.log(dataValues.current.imageUrl)} */}
-            <img src="" alt="img" />
+            <img src={hostelDefault} alt="img" />
             {/* <img src={avatarDefault} alt="img" /> */}
             {/* {imageList.map((url)=>{
                if(url==="https://firebasestorage.googleapis.com/v0/b/auth-development-4cccd.appspot.com/o/images%2Fcustomer.png7d3e244e-3c87-4f38-8c96-2e3d60f3149c?alt=media&token=a633f966-81f0-4557-b133-eb7d7835fbec"){
@@ -72,7 +74,7 @@ console.log(hostel);
         </div>
         <div className="col-md-6">
           <div className="profile-head">
-            <h1 className="name">{location.state.name}</h1>
+            <h1 className="hostel-name">{location.state.name}</h1>
             <ul className="nav nav-tab" role="tablist">
               <li className="nav-item"></li>
               <li className={`${location.state.category=="male"? "blue":"pink"}`}>{location.state.category=="male" ? "Gents":"Ladies"}</li>
@@ -84,7 +86,7 @@ console.log(hostel);
 
         <div className="hostel-profile-img-right " style={{ position: "relative" }}>
        
-        <img src=""/>
+        <img src={ownerDefault}/>
         </div>
         </div>
 
@@ -137,7 +139,7 @@ console.log(hostel);
                 <svg width="32" height="32" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M38 14H22V28H6V10H2V40H6V34H42V40H46V22C46 19.8783 45.1571 17.8434 43.6569 16.3431C42.1566 14.8429 40.1217 14 38 14ZM14 26C15.5913 26 17.1174 25.3679 18.2426 24.2426C19.3679 23.1174 20 21.5913 20 20C20 18.4087 19.3679 16.8826 18.2426 15.7574C17.1174 14.6321 15.5913 14 14 14C12.4087 14 10.8826 14.6321 9.75736 15.7574C8.63214 16.8826 8 18.4087 8 20C8 21.5913 8.63214 23.1174 9.75736 24.2426C10.8826 25.3679 12.4087 26 14 26V26Z" fill="black"/>
                 </svg>
-              <p>{location.state.no_two_bed}</p>
+              <p>{location.state.no_one_bed}</p>
                 </div>
                 </li>
 
@@ -179,7 +181,7 @@ console.log(hostel);
           </div>
           
           <div className="profile-work-right col-md-4 ">
-          <h4>{location.state.first_name+" "+location.state.first_name}</h4>
+          <h4>{location.state.first_name+" "+location.state.last_name}</h4>
 
             <h6>Owner Details</h6>
             
